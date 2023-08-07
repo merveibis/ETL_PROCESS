@@ -7,7 +7,7 @@ Bu bölümde;
 *   Çıkardığımız dataları gerekli formata 'transform' edeceğiz
 *   Dönüştürdüğümüz dataları veri mühendislerinin veya ihtiyacı olan kullanıcılarımızın rahatlıkla bir RDBMS'e yüklemeye hazır hale getireceğiz ..
 
-NOT : Proje çalışmaları Google Colab platformu üzerinde gerçekleştirilmiştir. Python kodlarınızı local bilgisayarınızda çalıştırmak için gerekli ayarların yapıldığından ve kütüphanelerin yüklendiğinden emin olunuz !
+NOT : Proje çalışmaları Google Colab platformu üzerinde gerçekleştirilmiştir. Python projesini local bilgisayarınızda çalıştırmak için gerekli ayarların yapıldığından ve kütüphanelerin yüklendiğinden emin olunuz !
 
 Gerekli modülleri ve fonksiyonlarımızı projemize entegre edelim..
 
