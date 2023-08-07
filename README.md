@@ -1,7 +1,7 @@
 
 # **Extract Transform Load (ETL)**
 
-Bu bölümde;
+Bu projede;
 *   CSV, JSON ve XML formatında dosya türlerini okuyacağız.
 *   Bu formattaki dosyalardan data 'extract' layacağız :)
 *   Çıkardığımız dataları gerekli formata 'transform' edeceğiz
