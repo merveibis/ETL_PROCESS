@@ -2,7 +2,7 @@
 # **Extract Transform Load (ETL)**
 
 Bu bölümde;
-*   CSV ve JSON formatında dosya türlerini okuyacağız.
+*   CSV, JSON ve XML formatında dosya türlerini okuyacağız.
 *   Bu formattaki dosyalardan data 'extract' layacağız :)
 *   Çıkardığımız dataları gerekli formata 'transform' edeceğiz
 *   Dönüştürdüğümüz dataları veri mühendislerinin veya ihtiyacı olan kullanıcılarımızın rahatlıkla bir RDBMS'e yüklemeye hazır hale getireceğiz ..
