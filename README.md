@@ -12,9 +12,9 @@ NOT : Proje çalışmaları Google Colab platformu üzerinde gerçekleştirilmi�
 Gerekli modülleri ve fonksiyonlarımızı projemize entegre edelim..
 
 ```bash
-import glob                                                                     # bu modül dosyalarımızı seçmemize yardım eder
-import pandas as pd                                                             # bu modül CSV dosyalarımızı işlememize yardım eder
-import xml.etree.ElementTree as ET                                              # bu modül XML dosyalarımızı işmememize yardım eder.
+import glob                                                                     
+import pandas as pd                                                             
+import xml.etree.ElementTree as ET                                              
 from datetime import datetime
 ```
 
@@ -54,9 +54,9 @@ Bu komut, belirtilen URL'den bir dosya indirmek için wget komutunu kullanır. �
 
 ## Dosyalarımızı Kaydedeceğimiz Path'lerimizi Ayarlayalım
 ```bash
-tmpfile    = "temp.tmp"                                                         # Çıkardığımız tüm verilerimizi kaydetmek için kullanacağımız dosya
-logfile    = "logfile.txt"                                                      # Tüm log faaliyetlerimiz bu dosyada kaydedilecektir
-targetfile = "transformed_data.csv"                                             # Dönüştürdüğümüz verilerimizin tutulacağı dosya
+tmpfile    = "temp.tmp"                                                        
+logfile    = "logfile.txt"                                                     
+targetfile = "transformed_data.csv"                                           
 ```
 
 # Extract (Çıkarma)
@@ -68,60 +68,50 @@ Dataframe, tablo benzeri yapıya sahip iki boyutlu bir veri yapısıdır ve her 
 
 ## Öncelikle CSV formatındaki dosyalarımızı çıkaracağımız fonksiyonumuzu oluşturalım
 ```bash
-def extract_from_csv(file_to_process):                                          # "file_to_process" parametresi işlem yapılacak CSV dosyasının adı veya yolunu alır.
-    dataframe = pd.read_csv(file_to_process)                                    # Pandas kütüphanesindeki read_csv fonksiyonu,
-                                                                                  # belirtilen CSV dosyasını okur ve içindeki verileri bir DataFrame'e dönüştürür.
-    return dataframe                                                            # Oluşturulan DataFrame nesnesini fonksiyonun çağrıldığı yere döndürür
+def extract_from_csv(file_to_process):                                         
+    dataframe = pd.read_csv(file_to_process)                                   
+    return dataframe                                                           
 ```
 
 ## Daha sonrasında JSON formatındaki dosyalarımızı çıkartmak için gerekli fonksiyonumuzu oluşturalım
 ```bash
-def extract_from_json(file_to_process):                                         # "file_to_process" parametresi işlem yapılacak JSON dosyasının adı veya yolunu alır.
-    dataframe = pd.read_json(file_to_process,lines=True)                        # Pandas kütüphanesindeki read_csv fonksiyonu,
-                                                                                  # belirtilen JSON dosyasını okur ve içindeki verileri bir DataFrame'e dönüştürür.
-                                                                                # 'lines=True' parametresi, JSON dosyasının satır satır okunmasını ve
-                                                                                #her bir satırın ayrı bir veri noktası olarak kabul edilmesini sağlar.
-    return dataframe                                                            # Oluşturulan DataFrame nesnesini fonksiyonun çağrıldığı yere döndürür
+def extract_from_json(file_to_process):                                         
+    dataframe = pd.read_json(file_to_process,lines=True)                       
+    return dataframe                                                            
 ```
 
 ## Son olarak da XML formatındaki dosyalarımızı çıkartma işlemini gerçekleştirecek fonksiyonumuzu yazalım
 ```bash
-def extract_from_xml(file_to_process):                                          # "file_to_process" parametresi işlem yapılacak XML dosyasının adı veya yolunu alır.
-    dataframe = pd.DataFrame(columns=["name", "height", "weight"])              # Sütunları "name", "height" ve "weight" isimleriyle boş bir pandas DataFrame nesnesi oluşturulur
-    tree = ET.parse(file_to_process)                                            # ElementTree modülündeki parse fonksiyonu kullanılarak XML dosyası ağaç yapısına çevrilir ve tree adlı bir değişkene atanır.
-                                                                                  # XML dosyasının ağaç yapısı, ElementTree modülü tarafından temsil edilir ve verileri gezinmeye olanak tanır.
-    root = tree.getroot()                                                       # XML ağacının kök düğümüne erişim sağlanır ve root adlı bir değişkene atanır.
-                                                                                  # Kök düğüm, XML belgesinin en üst düzey düğümüdür ve verileri gezinmeye başlamak için temel düğüm olarak kullanılır.
-    for person in root:                                                         # XML ağacındaki her "person" düğümü için bir döngü başlatır. Burada "person", XML dosyasındaki her "person" etiketini temsil eder.
-        name = person.find("name").text                                         # Her "person" düğümünün altında bulunan "name" etiketini bulur ve içerdiği metni alarak "name" değişkenine atanır. find fonksiyonu, belirtilen etiketi bulmak için kullanılır.
-        height = float(person.find("height").text)                              # Her "person" düğümünün altında bulunan "height" etiketini bulur ve içerdiği metni alarak float veri türüne dönüştürerek "height" değişkenine atanır.
-        weight = float(person.find("weight").text)                              # Her "person" düğümünün altında bulunan "weight" etiketini bulur ve içerdiği metni alarak float veri türüne dönüştürerek "weight" değişkenine atanır.
-        dataframe = dataframe.append({"name":name, "height":height,             # Her "person" düğümünden alınan "name", "height" ve "weight" değerleri bir satır olarak pandas DataFrame'e eklenir. append fonksiyonu, DataFrame'e yeni bir satır eklemek için kullanılır.
-                                      "weight":weight}, ignore_index=True)        # ignore_index=True parametresi, satır eklenirken mevcut indeksin görmezden gelinmesini ve otomatik olarak yeni bir indeks oluşturulmasını sağlar.
-    return dataframe                                                            # Oluşturulan DataFrame nesnesini fonksiyonun çağrıldığı yere döndürür
+def extract_from_xml(file_to_process):                                          
+    dataframe = pd.DataFrame(columns=["name", "height", "weight"])              
+    tree = ET.parse(file_to_process)                                            
+    root = tree.getroot()                                                      
+    for person in root:                                                        
+        name = person.find("name").text                                         
+        height = float(person.find("height").text)                              
+        weight = float(person.find("weight").text)                              
+        dataframe = dataframe.append({"name":name, "height":height,"weight":weight}, ignore_index=True)        
+    return dataframe                                                            
 ```
 
 ## Sıra geldi tüm dosya tiplerini çıkarma işlemimize ait fonksiyona;
 ```bash
 def extract():
-    extracted_data = pd.DataFrame(columns=['name','height','weight'])           # Çıkarılacak verilerimizi tutacağımız sütunları "name", "height" ve "weight" isimleriyle boş bir pandas DataFrame nesnesi oluşturulur
+    extracted_data = pd.DataFrame(columns=['name','height','weight'])           
 
     #tüm csv dosyalarımızı işleyelim
-    for csvfile in glob.glob("*.csv"):                                          # glob modülü kullanılarak tüm CSV dosyalarının isimlerini içeren bir döngü başlatılır.
-        extracted_data = extracted_data.append(extract_from_csv(csvfile),       # "extract_from_csv" fonksiyonu kullanılarak her CSV dosyasındaki veriler çıkarılır ve bu veriler "extracted_data" DataFrame'ine eklenir.
-                                               ignore_index=True)
+    for csvfile in glob.glob("*.csv"):                                          
+        extracted_data = extracted_data.append(extract_from_csv(csvfile),ignore_index=True)
 
     #tüm json dosyalarımızı işleyelim
-    for jsonfile in glob.glob("*.json"):                                        # glob modülü kullanılarak tüm JSON dosyalarının isimlerini içeren bir döngü başlatılır.
-        extracted_data = extracted_data.append(extract_from_json(jsonfile),     # "extract_from_json" fonksiyonu kullanılarak her JSON dosyasındaki veriler çıkarılır ve bu veriler "extracted_data" DataFrame'ine eklenir.
-                                               ignore_index=True)
+    for jsonfile in glob.glob("*.json"):                                        
+        extracted_data = extracted_data.append(extract_from_json(jsonfile), ignore_index=True)
 
     #tüm xml dosyalarımızı işleyelim
-    for xmlfile in glob.glob("*.xml"):                                          # glob modülü kullanılarak tüm XML dosyalarının isimlerini içeren bir döngü başlatılır.
-        extracted_data = extracted_data.append(extract_from_xml(xmlfile),       # "extract_from_xml" fonksiyonu kullanılarak her XML dosyasındaki veriler çıkarılır ve bu veriler "extracted_data" DataFrame'ine eklenir.
-                                               ignore_index=True)
+    for xmlfile in glob.glob("*.xml"):                                          
+        extracted_data = extracted_data.append(extract_from_xml(xmlfile), ignore_index=True)
 
-    return extracted_data                                                       # Oluşturulan DataFrame nesnesini fonksiyonun çağrıldığı yere döndürür
+    return extracted_data                                                       
 ```
 
 Bu işlev, aynı klasörde bulunan farklı formatlardaki veri dosyalarını tek bir DataFrame'de birleştirmek için kullanılabilir ve verilerin daha kolay analiz edilmesini ve işlenmesini sağlayabilir.
@@ -135,18 +125,16 @@ Dönüştürme işlemi iki aşama içermektedir;
 
 ```bash
 def transform(data):
-        data['height'] = round(data.height * 0.0254,2)                          # "height" sütunundaki verileri dönüştürülerek DataFrame'de güncellenir.
-        data['weight'] = round(data.weight * 0.45359237,2)                      # "weight" sütunundaki verileri dönüştürülerek DataFrame'de güncellenir.
-        return data                                                             # Dönüştürülmüş DataFrame'i fonksiyonun çağrıldığı yere döndürür.
-
+        data['height'] = round(data.height * 0.0254,2)                          
+        data['weight'] = round(data.weight * 0.45359237,2)                      
+        return data                                                             
 ```
 
 # Loading (Yükleme)
 Yazacağımız load fonksiyonu, verileri bir pandas DataFrame nesnesinden CSV dosyasına kaydetmek için kullanılır.
 ```bash
-def load(targetfile,data_to_load):                                              #" targetfile" parametresi dosya adı/yolunu alırken "data_to_load" parametresi ise pandas DataFrame nesnesini alır
-    data_to_load.to_csv(targetfile)                                             # "data_to_load" DataFrame nesnesindeki veriler, "targetfile" adında belirtilen CSV dosyasına kaydedilir.
-                                                                                  # to_csv fonksiyonu, DataFrame'deki verileri CSV formatında bir dosyaya yazmak için kullanılır.
+def load(targetfile,data_to_load):                                              
+    data_to_load.to_csv(targetfile)                                             
 ```
 
 # Logging
@@ -154,14 +142,12 @@ Logging, bilgisayar programlarında çalışma süreci boyunca oluşan olayları
 
 Bu Python fonksiyonu, gelen mesajı ve mevcut zaman bilgisini alarak bir log dosyasına yazan bir işlevdir. Log dosyası, her log kaydının tarih-saat bilgisi ile mesajın kaydedildiği bir metin dosyasıdır.
 ```bash
-def log(message):                                                               # "message" adında bir parametre Log dosyasına yazılacak olan mesajı alır
-    timestamp_format = '%Y-%h-%d-%H:%M:%S'                                      # Log dosyasına yazılacak zaman bilgisinin formatı belirtilir. %Y yılın dört haneli formatını, %h ayın kısaltılmış adını, %d günü, %H saati, %M dakikayı ve %S saniyeyi temsil eder
-    now = datetime.now()                                                        # "datetime" modülündeki now fonksiyonu kullanılarak mevcut zaman bilgisi alınır. datetime.now() fonksiyonu, sistem saatine göre mevcut tarih ve saati döndürür.
-    timestamp = now.strftime(timestamp_format)                                  # Mevcut zaman bilgisi belirtilen timestamp_format formatına göre biçimlendirilir ve timestamp adlı bir değişkene atanır.
-    with open("logfile.txt","a") as f:                                          # "logfile.txt" adlı bir metin dosyası açılır.
-                                                                                  # Dosya, loglar için kullanılacak olan dosyadır. open fonksiyonu, dosyayı açmak ve işlem yapmak için kullanılır. "a" modu, dosyanın ekleme (append) modunda açılmasını sağlar.
-                                                                                  # Yani, dosyaya yazma işlemi, dosyanın sonuna eklenerek yapılır ve mevcut içeriği korunur.
-        f.write(timestamp + ',' + message + '\n')                               # Log mesajı ve zaman bilgisi log dosyasına yazılır. write fonksiyonu, verilen veriyi dosyaya yazmak için kullanılır.
+def log(message):                                                               
+    timestamp_format = '%Y-%h-%d-%H:%M:%S'                                      
+    now = datetime.now()                                                        
+    timestamp = now.strftime(timestamp_format)                                  
+    with open("logfile.txt","a") as f:                                          
+        f.write(timestamp + ',' + message + '\n')                               
 ```
 
 *Dipnot ▶* "with open" bloğu kullanıldığında, dosya otomatik olarak kapanır, böylece açık dosya yönetimiyle ilgili sorunlar önlenir.
@@ -191,8 +177,7 @@ transformed_data
 Load sürecimiz işleniyor..
 ```bash
 log("Load phase Started")
-load(targetfile,transformed_data)                                               # "load" fonksiyonu çağrılır ve "targetfile" adı verilen hedef CSV dosyasına "transformed_data" adı verilen bir DataFrame nesnesini yükler.
-                                                                                  #"load" fonksiyonu, verileri bir CSV dosyasına yazma işlemini gerçekleştirir.
+load(targetfile,transformed_data)                                               
 log("Load phase Ended")
 ```
 
