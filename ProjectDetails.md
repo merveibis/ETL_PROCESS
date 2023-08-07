@@ -1,4 +1,3 @@
-
 # **Extract Transform Load (ETL)**
 
 Bu bölümde;
