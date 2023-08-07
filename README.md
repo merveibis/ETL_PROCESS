@@ -11,6 +11,13 @@ NOT : Proje çalışmaları Google Colab platformu üzerinde gerçekleştirilmi�
 
 Gerekli modülleri ve fonksiyonlarımızı projemize entegre edelim..
 
+```bash
+import glob                                                                     # bu modül dosyalarımızı seçmemize yardım eder
+import pandas as pd                                                             # bu modül CSV dosyalarımızı işlememize yardım eder
+import xml.etree.ElementTree as ET                                              # bu modül XML dosyalarımızı işmememize yardım eder.
+from datetime import datetime
+```
+
 **glos Modülü**
 
  Python'da glob fonksiyonu, belirli bir klasördeki dosya ve dizinleri belirli bir kalıp (pattern) kullanarak eşleştirmek için kullanılır. Bu fonksiyon, dosya ve dizin işlemleri yaparken belirli dosya türlerini veya isim düzenlemelerini filtrelemek veya listelemek için kullanışlıdır.
@@ -29,13 +36,6 @@ Pandas, veri dosyalarını (CSV, Excel, SQL vb.) yüklemek için kullanılabilir
 ElementTree modülü, Python'da XML (Extensible Markup Language) belgelerini işlemek ve analiz etmek için kullanılan bir kütüphanedir. XML, yapılandırılmış verileri taşımak için kullanılan bir işaretleme dilidir ve ağaç benzeri bir yapıda düzenlenmiş veriler içerir.
 
 ElementTree modülü, XML belgelerini okumak, oluşturmak ve düzenlemek için bir dizi işlev ve sınıf içerir. Bu modül sayesinde, XML belgelerini bir Python programında veri yapısı olarak temsil edebilir ve bu belgeleri işlemek için gerekli işlemleri yapabilirsiniz.
-
-```bash
-import glob                                                                     # bu modül dosyalarımızı seçmemize yardım eder
-import pandas as pd                                                             # bu modül CSV dosyalarımızı işlememize yardım eder
-import xml.etree.ElementTree as ET                                              # bu modül XML dosyalarımızı işmememize yardım eder.
-from datetime import datetime
-```
 
 
 ## Dosyalarımızı Yükleyelim
