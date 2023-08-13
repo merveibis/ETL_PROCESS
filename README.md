@@ -46,8 +46,6 @@ Bu komut, belirtilen URL'den bir dosya indirmek için wget komutunu kullanır. �
 ```
 
 ## Dosyalarımızı Unzip'leyelim
-Bu komut, belirtilen URL'den bir dosya indirmek için wget komutunu kullanır. İndirilecek dosya, "source.zip" adlı bir zip dosyasıdır. İlgili URL, veri dosyasının bulunduğu konumu belirtir.
-
 ```bash
 !unzip source.zip
 ```
