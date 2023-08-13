@@ -18,7 +18,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 ```
 
-**glos Modülü**
+**glob Modülü**
 
  Python'da glob fonksiyonu, belirli bir klasördeki dosya ve dizinleri belirli bir kalıp (pattern) kullanarak eşleştirmek için kullanılır. Bu fonksiyon, dosya ve dizin işlemleri yaparken belirli dosya türlerini veya isim düzenlemelerini filtrelemek veya listelemek için kullanışlıdır.
 
